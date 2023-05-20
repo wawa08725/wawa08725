@@ -1,0 +1,25 @@
+ROS TOPICS
+ROS currently supports TCP/IP-based and UDP-based message transport. The TCP/IP-based transport is known as TCPROS and streams message data over persistent TCP/IP connections. TCPROS is the default transport used in ROS and is the only transport that client libraries are required to support. The UDP-based transport, which is known as UDPROS and is currently only supported in roscpp, separates messages into UDP packets. UDPROS is a low-latency, lossy transport, so is best suited for tasks like teleoperation.ROS nodes negotiate the desired transport at runtime. For example, if a node prefers UDPROS transport but the other Node does not support it, it can fallback on TCPROS transport. This negotiation model enables new transports to be added over time as compelling use cases arise.
+
+ROS SERVICES
+Define the service message: You need to define the structure of the request and response messages for the service. This is typically done using the .srv file format in ROS.Create the service server: In your ROS node, you create a service server object that provides the service. The server is responsible for receiving requests and sending responses. You specify the service name, message types, and a callback function that will be executed when a request is received.Implement the service callback: The service callback function is executed whenever a request is received by the service server. This function performs the necessary computations or actions based on the request and generates a response.Create the service client: In another ROS node, you create a service client object that will send requests to the service server. The client specifies the service name and message types.Call the service: In your client code, you can call the service by sending a request to the server. The client waits for the response and receives it once it is available.Process the response: Once the client receives the response, it can process the data or perform any necessary actions based on the response.
+
+ROS Topics VS ROS MESSAGE
+ROS Topics
+-A topic is a named bus over which nodes can publish messages and subscribe to receive those messages.
+-Topics facilitate asynchronous communication in a publish-subscribe pattern.
+-Nodes can publish data to a topic without knowing which nodes, if any, are subscribing to it.
+-Multiple nodes can publish and/or subscribe to the same topic.
+-Topics are identified by their unique names, usually represented as strings.
+-Messages published on a topic are distributed to all subscribers of that topic.
+-The publish-subscribe model allows for decoupled communication between nodes, enabling loose coupling and modular system design.
+ROS Messages:
+-A message is a data structure used to store and exchange information between nodes in a ROS system.
+-Messages define the structure and type of data being published or received on a topic.
+-ROS provides a message description language (msg) to define custom message types.
+-Messages can contain simple types (e.g., integers, floats, strings) as well as complex types (e.g., arrays, nested structures).
+-Messages define the format and content of the data being transmitted.
+-Nodes that publish or subscribe to a topic must agree on the message type being used.
+
+ROS Topics And Ros MESSAGE
+ROS topics are used for asynchronous publish-subscribe communication between multiple nodes.ROS services are used for synchronous request-response communication between a client and a server. Topics are suitable for broadcasting data to multiple nodes, while services are useful for performing specific tasks or requesting information from a single node.
